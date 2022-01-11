@@ -1,9 +1,10 @@
 
-const {fork} = require("child_process")
-const target = "";
+const {fork} = require("child_process");
+require("dotenv").config();
+const target = `${process.env.target}`;
 
-const threads = 100;
-const loops = 1000;
+const threads = parseInt(process.env.THREAD);
+const loops = parseInt(process.env.LOOPS);
 async function dos(target,id) {
     let child = fork("./exec.js");
     child.send(JSON.stringify({target:target,loops:loops,id:id}));
